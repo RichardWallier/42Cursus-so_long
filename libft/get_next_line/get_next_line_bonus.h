@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 09:50:44 by rwallier          #+#    #+#             */
-/*   Updated: 2022/06/04 18:21:53 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/07/30 22:24:41 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ size_t	end_line(char *buffer);
 
 size_t	next_nl(char *buffer);
 
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen2(const char *str);
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin2(char const *s1, char const *s2);
 
-char	*ft_substr(char const *str, unsigned int start, size_t len);
+char	*ft_substr2(char const *str, unsigned int start, size_t len);
 
 #endif

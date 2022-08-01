@@ -6,13 +6,13 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:49:33 by rwallier          #+#    #+#             */
-/*   Updated: 2022/06/04 09:33:39 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/07/30 22:24:27 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin2(char const *s1, char const *s2)
 {
 	char	*newstr;
 	size_t	fullsize;
@@ -21,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	fullsize = (ft_strlen(s1) + ft_strlen(s2)) + 1;
+	fullsize = (ft_strlen2(s1) + ft_strlen2(s2)) + 1;
 	newstr = (char *)malloc(fullsize * sizeof(char));
 	if (!newstr)
 		return (NULL);
@@ -41,7 +41,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (newstr);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen2(const char *str)
 {
 	size_t	index;
 
@@ -51,7 +51,7 @@ size_t	ft_strlen(const char *str)
 	return (index);
 }
 
-char	*ft_substr(char const *str, unsigned int start, size_t len)
+char	*ft_substr2(char const *str, unsigned int start, size_t len)
 {
 	char		*ret;
 	size_t		sz_temp;
@@ -59,8 +59,8 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 
 	if (!str)
 		return (NULL);
-	if (len > ft_strlen(str))
-		ret = (char *)malloc(ft_strlen(str) + 1);
+	if (len > ft_strlen2(str))
+		ret = (char *)malloc(ft_strlen2(str) + 1);
 	else
 		ret = (char *)malloc(len + 1);
 	if (!ret)

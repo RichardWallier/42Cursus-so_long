@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/01 17:40:55 by rwallier          #+#    #+#             */
-/*   Updated: 2022/06/04 18:21:09 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/07/30 22:26:03 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ char	*make_line_no_nl(char *line, char *buffer)
 	char	*temp;
 
 	if (!line)
-		line = ft_substr(buffer, 0, ft_strlen(buffer));
+		line = ft_substr2(buffer, 0, ft_strlen2(buffer));
 	else
 	{
 		temp = line;
-		line = ft_strjoin(line, buffer);
+		line = ft_strjoin2(line, buffer);
 		free(temp);
 	}
-	if (!ft_strlen(line))
+	if (!ft_strlen2(line))
 	{
 		free(line);
 		return (NULL);
@@ -66,23 +66,23 @@ char	*make_line_with_nl(char *buffer, char **trash, char *line)
 {
 	char	*temp;
 
-	temp = ft_substr(buffer, 0, end_line(buffer) + 1);
-	*trash = ft_substr(buffer, ft_strlen(temp),
-			ft_strlen(&buffer[ft_strlen(temp)]));
+	temp = ft_substr2(buffer, 0, end_line(buffer) + 1);
+	*trash = ft_substr2(buffer, ft_strlen2(temp),
+			ft_strlen2(&buffer[ft_strlen2(temp)]));
 	free(buffer);
 	buffer = NULL;
 	buffer = line;
 	if (!line)
 	{
-		line = ft_substr(temp, 0, ft_strlen(temp));
+		line = ft_substr2(temp, 0, ft_strlen2(temp));
 		free(temp);
 		temp = NULL;
 	}
 	else
-		line = ft_strjoin(line, temp);
+		line = ft_strjoin2(line, temp);
 	free(temp);
 	free(buffer);
-	if (!ft_strlen(line))
+	if (!ft_strlen2(line))
 	{
 		free(line);
 		return (NULL);
@@ -115,12 +115,12 @@ int	treat_trash_bonus(char **trash, char **line)
 	if (next_nl(*trash))
 	{
 		buffer = *trash;
-		temp = ft_substr(buffer, 0, end_line(buffer) + 1);
-		*trash = ft_substr(buffer, ft_strlen(temp),
-				ft_strlen(&buffer[ft_strlen(temp)]));
+		temp = ft_substr2(buffer, 0, end_line(buffer) + 1);
+		*trash = ft_substr2(buffer, ft_strlen2(temp),
+				ft_strlen2(&buffer[ft_strlen2(temp)]));
 		free(buffer);
 		buffer = NULL;
-		*line = ft_substr(temp, 0, ft_strlen(temp));
+		*line = ft_substr2(temp, 0, ft_strlen2(temp));
 		free(temp);
 		temp = NULL;
 		return (1);
@@ -128,7 +128,7 @@ int	treat_trash_bonus(char **trash, char **line)
 	else
 	{
 		buffer = *line;
-		*line = ft_substr(*trash, 0, ft_strlen(*trash));
+		*line = ft_substr2(*trash, 0, ft_strlen2(*trash));
 		free(*trash);
 		*trash = NULL;
 		return (0);
