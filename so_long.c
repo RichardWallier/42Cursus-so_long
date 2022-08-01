@@ -18,6 +18,8 @@ int	rows_len(const char *file)
 		temp = get_next_line(fd);
 		index++;
 	}
+	free(temp);
+	close(fd);
 	return (index);
 }
 
@@ -26,23 +28,26 @@ void	map_parse(t_data *data)
 	int	fd_map;
 	int	index;
 
-	fd_map = open("./map.ber", O_RDONLY);
-	data->map.ber_x = rows_len("./map.ber") - 1;
+	fd_map = open(data->map.file, O_RDONLY);
+	data->map.ber_x = rows_len("./map.ber");
 	data->map.coordenates = (char **)malloc(sizeof(char *) * data->map.ber_x);
 	data->map.coordenates[0] = get_next_line(fd_map);
-	data->map.ber_y = ft_strlen(data->map.coordenates[0]) - 1;
+	data->map.ber_y = ft_strlen(data->map.coordenates[0]);
 	data->map.floor_width = 56;
 	data->map.floor_height = 56;
 	data->map.exit_width = 56;
 	data->map.exit_height = 56;
 	data->map.wall_width = 56;
 	data->map.wall_height = 56;
+	data->map.floor_image = mlx_xpm_file_to_image(data->mlx, "./assets/floor.xpm", &data->map.floor_width, &data->map.floor_height);
+	data->map.wall_image = mlx_xpm_file_to_image(data->mlx, "./assets/wall.xpm", &data->map.wall_width, &data->map.wall_height);
 	index = 0;
 	while (data->map.coordenates[index])
 	{
 		index ++;
 		data->map.coordenates[index] = get_next_line(fd_map);
 	}
+	close(fd_map);
 }
 
 void	map_draw(t_data *data)
@@ -52,12 +57,6 @@ void	map_draw(t_data *data)
 
 	x = 0;
 	y = 0;
-	data->map.floor_image = mlx_xpm_file_to_image(data->mlx, "./assets/floor.xpm", &data->map.floor_width, &data->map.floor_height);
-	data->map.wall_image = mlx_xpm_file_to_image(data->mlx, "./assets/wall.xpm", &data->map.wall_width, &data->map.wall_height);
-	if (data->map.collectable_count > 0)
-		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_close.xpm", &data->map.exit_width, &data->map.exit_height);
-	else
-		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_open.xpm", &data->map.exit_width, &data->map.exit_height);
 	while (data->map.coordenates[x])
 	{
 		y = 0;
@@ -97,6 +96,10 @@ void	collectable_parse(t_data *data)
 	data->map.collectable_width = 28;
 	data->map.collectable_height = 28;
 	data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin.xpm", &data->map.collectable_width, &data->map.collectable_height);
+	if (data->map.collectable_count > 0)
+		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_close.xpm", &data->map.exit_width, &data->map.exit_height);
+	else
+		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_open.xpm", &data->map.exit_width, &data->map.exit_height);
 }
 
 void	collectable_draw(t_data *data)
@@ -160,16 +163,18 @@ void	destroy_all(t_data *data)
 	int	index;
 
 	index = 0;
-	while(data->map.coordenates[index])
-	{
-		free(data->map.coordenates[index]);
-		index++;
-	}
-	free(data->map.coordenates);
-	free(data->map.floor_image);
-	free(data->map.wall_image);
-	free(data->player.image);
-	mlx_destroy_image(data->mlx, data->window.ptr);
+	// while(data->map.coordenates[index])
+	// {
+	// 	free(data->map.coordenates[index]);
+	// 	index++;
+	// }
+	// free(data->map.coordenates);
+	mlx_destroy_image(data->mlx, data->player.image);
+	mlx_destroy_image(data->mlx, data->map.wall_image);
+	mlx_destroy_image(data->mlx, data->map.exit_image);
+	mlx_destroy_image(data->mlx, data->map.floor_image);
+	mlx_destroy_image(data->mlx, data->map.collectable_image);
+	mlx_destroy_window(data->mlx, data->window.ptr);
 	free(data->mlx);
 	exit(0);
 }
@@ -191,6 +196,13 @@ void	end(t_data *data)
 void	clean_collectable(t_data *data)
 {
 	data->map.collectable_count--;
+	if (data->map.collectable_count == 0)
+	{
+		if (data->map.exit_image)
+			mlx_destroy_image(data->mlx, data->map.exit_image);
+		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_open.xpm", &data->map.exit_width, &data->map.exit_height);
+	}
+
 	data->map.coordenates[data->player.ber_y][data->player.ber_x] = '0';
 }
 
@@ -234,16 +246,14 @@ int	keyboard_event(int keycode, t_data *data)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
 	t_data	data;
-	char	*temp;
-	int		fd_map;
-	int		index;
 
+	data.map.file = argv[1];
 	data.mlx = mlx_init();
 	map_parse(&data);
-	data.window.ptr = mlx_new_window(data.mlx, data.map.ber_y * 56, data.map.ber_x * 56, "Hello Magrao");
+	data.window.ptr = mlx_new_window(data.mlx, (data.map.ber_y - 1) * 56, (data.map.ber_x - 1) * 56, "Hello Magrao");
 	collectable_parse(&data);
 	player_parse(&data);
 	map_draw(&data);

@@ -35,6 +35,7 @@ typedef struct	s_window
 
 typedef struct	s_map
 {
+	char 	*file;
 	char	**coordenates;
 	void	*wall_image;
 	int		wall_width;
