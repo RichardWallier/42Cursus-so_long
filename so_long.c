@@ -29,6 +29,7 @@ void	map_parse(t_data *data)
 	int	index;
 
 	fd_map = open(data->map.file, O_RDONLY);
+	data->map.game_loop = 0;
 	data->map.ber_x = rows_len("./map.ber");
 	data->map.coordenates = (char **)malloc(sizeof(char *) * data->map.ber_x);
 	data->map.coordenates[0] = get_next_line(fd_map);
@@ -246,6 +247,18 @@ int	keyboard_event(int keycode, t_data *data)
 	return (0);
 }
 
+int	game_loop(t_data *data)
+{
+	if (data->map.game_loop < 4200)
+	{
+		data->map.game_loop++;
+		return (1);
+	}
+	data->map.game_loop = 0;
+	ft_printf("loop\n");
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
@@ -260,6 +273,7 @@ int	main(int argc, char *argv[])
 	player_draw(&data);
 	collectable_draw(&data);
 	mlx_key_hook(data.window.ptr, keyboard_event, &data);
+	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

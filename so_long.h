@@ -38,6 +38,7 @@ typedef struct	s_map
 	char 	*file;
 	char	**coordenates;
 	void	*wall_image;
+	int		game_loop;
 	int		wall_width;
 	int		wall_height;
 	void	*exit_image;
