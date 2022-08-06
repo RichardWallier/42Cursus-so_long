@@ -10,14 +10,38 @@ LIBFTPATH	=	./libft
 
 LIBFT	=	$(LIBFTPATH)/libft.a
 
-$(MAKE)	=	make -C
+MLXPATH	=	./minilibx_opengl_20191021
+
+MLX	=	$(MLXPATH)/libmlx.a
+
+MAKE	=	make -C
 
 NAME = so_long
+
+RM = rm -f
+
+.c.o:	
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all: $(NAME)
 
 $(LIBFT):
-		$(MAKE) $(LIBFTPATH)
+		@$(MAKE) $(LIBFTPATH)
 
-$(NAME):	$(LIBFT)
-		gcc libft.a libmlx.a so_long.c -framework OpenGL -framework AppKit -o main
+$(MLX):
+		@$(MAKE) $(MLXPATH)
+
+$(NAME):	$(LIBFT) $(MLX) $(OBJECTS)
+		$(CC) $(LIBFT) $(MLX) $(OBJECTS) $(FRAMEWORK) -o $(NAME)
+
+clean:
+	$(RM) $(OBJECTS)
+	$(MAKE) $(MLXPATH) clean
+	$(MAKE) $(LIBFTPATH) clean
+
+fclean: clean
+	$(RM) $(NAME)
+	$(MAKE) $(LIBFTPATH) clean
+	$(RM) $(MLX)
+
+re: fclean all

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/06 13:46:08 by rwallier          #+#    #+#             */
+/*   Updated: 2022/08/06 13:55:24 by rwallier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include <fcntl.h>
 #include "mlx.h"
@@ -45,7 +57,7 @@ void	map_parse(t_data *data)
 	index = 0;
 	while (data->map.coordenates[index])
 	{
-		index ++;
+		index++;
 		data->map.coordenates[index] = get_next_line(fd_map);
 	}
 	close(fd_map);
@@ -126,7 +138,6 @@ void	collectable_draw(t_data *data)
 
 void	player_parse(t_data *data)
 {
-	int	index;
 	int	x;
 	int	y;
 
@@ -165,12 +176,12 @@ void	destroy_all(t_data *data)
 	int	index;
 
 	index = 0;
-	// while(data->map.coordenates[index])
-	// {
-	// 	free(data->map.coordenates[index]);
-	// 	index++;
-	// }
-	// free(data->map.coordenates);
+	while(data->map.coordenates[index])
+	{
+		free(data->map.coordenates[index]);
+		index++;
+	}
+	free(data->map.coordenates);
 	mlx_destroy_image(data->mlx, data->player.image);
 	mlx_destroy_image(data->mlx, data->map.wall_image);
 	mlx_destroy_image(data->mlx, data->map.exit_image);
@@ -221,6 +232,8 @@ int	keyboard_event(int keycode, t_data *data)
 	}
 	else if (keycode == A_KEY)
 	{
+		mlx_destroy_image(data->mlx, data->player.image);
+		data->player.image = mlx_xpm_file_to_image(data->mlx, "./assets/demon_reflect.xpm", &data->player.width, &data->player.height);
 		if (data->map.coordenates[data->player.ber_y][data->player.ber_x - 1] == '1')
 			return (1);
 		data->player.ber_x--;
@@ -235,6 +248,8 @@ int	keyboard_event(int keycode, t_data *data)
 	}
 	else if (keycode == D_KEY)
 	{
+		mlx_destroy_image(data->mlx, data->player.image);
+		data->player.image = mlx_xpm_file_to_image(data->mlx, "./assets/demon.xpm", &data->player.width, &data->player.height);
 		if (data->map.coordenates[data->player.ber_y][data->player.ber_x + 1] == '1')
 			return (1);
 		data->player.ber_x++;
@@ -279,6 +294,8 @@ int	main(int argc, char *argv[])
 {
 	t_data	data;
 
+	if (argc != 2)
+		exit (EXIT_FAILURE);
 	data.map.file = argv[1];
 	data.mlx = mlx_init();
 	map_parse(&data);
