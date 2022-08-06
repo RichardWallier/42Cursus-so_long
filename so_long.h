@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define A_KEY 0
-# define S_KEY 1
+# define S_KEY 1 
 # define D_KEY 2
 # define W_KEY 13
 # define LEFT_KEY 123
@@ -48,6 +48,7 @@ typedef struct	s_map
 	int		floor_width;
 	int		floor_height;
 	void	*collectable_image;
+	int		collectable_frame;
 	int		collectable_count;
 	int		collectable_width;
 	int		collectable_height;

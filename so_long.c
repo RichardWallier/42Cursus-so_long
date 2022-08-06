@@ -96,7 +96,8 @@ void	collectable_parse(t_data *data)
 	}
 	data->map.collectable_width = 28;
 	data->map.collectable_height = 28;
-	data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin.xpm", &data->map.collectable_width, &data->map.collectable_height);
+	data->map.collectable_frame = 0;
+	data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin0.xpm", &data->map.collectable_width, &data->map.collectable_height);
 	if (data->map.collectable_count > 0)
 		data->map.exit_image = mlx_xpm_file_to_image(data->mlx, "./assets/door_close.xpm", &data->map.exit_width, &data->map.exit_height);
 	else
@@ -255,6 +256,21 @@ int	game_loop(t_data *data)
 		return (1);
 	}
 	data->map.game_loop = 0;
+	mlx_destroy_image(data->mlx, data->map.collectable_image);
+	if (data->map.collectable_frame == 0)
+		data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin0.xpm", &data->map.collectable_width, &data->map.collectable_height);
+	else if (data->map.collectable_frame == 1)
+		data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin1.xpm", &data->map.collectable_width, &data->map.collectable_height);
+	else if (data->map.collectable_frame == 2)
+		data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin2.xpm", &data->map.collectable_width, &data->map.collectable_height);
+	else if (data->map.collectable_frame == 3)
+		data->map.collectable_image = mlx_xpm_file_to_image(data->mlx, "./assets/coin3.xpm", &data->map.collectable_width, &data->map.collectable_height);
+
+	if (data->map.collectable_frame >= 3)
+		data->map.collectable_frame = 0;
+	else
+		data->map.collectable_frame++;
+	refresh(data);
 	ft_printf("loop\n");
 	return (0);
 }
@@ -272,6 +288,7 @@ int	main(int argc, char *argv[])
 	map_draw(&data);
 	player_draw(&data);
 	collectable_draw(&data);
+	mlx_do_key_autorepeaton(data.mlx);
 	mlx_key_hook(data.window.ptr, keyboard_event, &data);
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_loop(data.mlx);
