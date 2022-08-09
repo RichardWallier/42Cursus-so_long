@@ -10,7 +10,8 @@
 # define UP_KEY 126
 # define ESC_KEY 53
 
-# include "mlx.h"
+#include <fcntl.h>
+#include "mlx.h"
 # include "libft/libft.h"
 
 typedef struct	s_player
@@ -39,6 +40,7 @@ typedef struct	s_map
 	char	**coordenates;
 	void	*wall_image;
 	int		game_loop;
+	int		game_frame;
 	int		wall_width;
 	int		wall_height;
 	void	*exit_image;
@@ -48,10 +50,12 @@ typedef struct	s_map
 	int		floor_width;
 	int		floor_height;
 	void	*collectable_image;
-	int		collectable_frame;
 	int		collectable_count;
 	int		collectable_width;
 	int		collectable_height;
+	void	*enemy_image;
+	int		enemy_width;
+	int		enemy_height;
 	int		ber_x;
 	int		ber_y;
 }				t_map;
