@@ -10,7 +10,7 @@ LIBFTPATH	=	./libft
 
 LIBFT	=	$(LIBFTPATH)/libft.a
 
-MLXPATH	=	./minilibx_opengl_20191021
+MLXPATH	=	./minilibx
 
 MLX	=	$(MLXPATH)/libmlx.a
 
