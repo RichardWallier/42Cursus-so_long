@@ -1,4 +1,4 @@
-SOURCES	=	so_long.c
+SOURCES	=	so_long.c keyboard_event.c framework.c game_loop.c parse.c so_long_utils.c
 
 OBJECTS	=	$(SOURCES:.c=.o)
 
@@ -26,12 +26,12 @@ RM = rm -f
 all: $(NAME)
 
 $(LIBFT):
-		@$(MAKE) $(LIBFTPATH)
+		$(MAKE) $(LIBFTPATH)
 
 $(MLX):
-		@$(MAKE) $(MLXPATH)
+		$(MAKE) $(MLXPATH)
 
-$(NAME):	$(LIBFT) $(MLX) $(OBJECTS)
+$(NAME):	$(OBJECTS) $(LIBFT) $(MLX)
 		$(CC) $(LIBFT) $(MLX) $(OBJECTS) $(FRAMEWORK) -o $(NAME)
 
 clean:

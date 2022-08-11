@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 04:04:36 by rwallier          #+#    #+#             */
+/*   Updated: 2022/08/11 04:04:39 by rwallier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define A_KEY 0
@@ -10,11 +22,11 @@
 # define UP_KEY 126
 # define ESC_KEY 53
 
-#include <fcntl.h>
-#include "mlx.h"
+# include <fcntl.h>
+# include "./minilibx/mlx.h"
 # include "libft/libft.h"
 
-typedef struct	s_player
+typedef struct s_player
 {
 	void	*image;
 	int		ber_x;
@@ -27,16 +39,16 @@ typedef struct	s_player
 	int		velocity_y;
 }				t_player;
 
-typedef struct	s_window
+typedef struct s_window
 {
 	void	*ptr;
 	int		width;
 	int		height;
 }				t_window;
 
-typedef struct	s_map
+typedef struct s_map
 {
-	char 	*file;
+	char	*file;
 	char	**coordenates;
 	void	*wall_image;
 	int		game_loop;
@@ -60,12 +72,62 @@ typedef struct	s_map
 	int		ber_y;
 }				t_map;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void		*mlx;
 	t_window	window;
 	t_map		map;
 	t_player	player;
 }				t_data;
+
+int		rows_len(const char *file);
+
+int		get_map(t_data *data);
+
+void	map_parse(t_data *data);
+
+void	enemy_parse(t_data *data);
+
+int		set_collectable_images(t_data *data);
+
+void	collectable_parse(t_data *data);
+
+int		set_player_x_y(t_data *data, int x, int y);
+
+void	player_parse(t_data *data);
+
+void	map_draw(t_data *data);
+
+void	enemy_draw(t_data *data);
+
+void	collectable_draw(t_data *data);
+
+void	player_draw(t_data *data);
+
+void	refresh(t_data *data);
+
+int		end(t_data *data);
+
+int		destroy_all(t_data *data);
+
+void	clean_collectable(t_data *data);
+
+int		game_over(t_data *data);
+
+int		change_coin_image(t_data *data);
+
+int		change_enemy_image(t_data *data);
+
+int		game_loop(t_data *data);
+
+int		player_w(t_data *data);
+
+int		player_a(t_data *data);
+
+int		player_s(t_data *data);
+
+int		player_d(t_data *data);
+
+int		keyboard_event(int keycode, t_data *data);
 
 #endif
