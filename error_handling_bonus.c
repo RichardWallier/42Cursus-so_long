@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   error_handling_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 17:11:31 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 09:54:53 by rwallier         ###   ########.fr       */
+/*   Created: 2022/08/18 09:29:20 by rwallier          #+#    #+#             */
+/*   Updated: 2022/08/18 10:23:00 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long_bonus.h"
 
-size_t	ft_strlen(const char *str)
+void	map_open_error(void)
 {
-	size_t	index;
+	ft_printf("ERROR\nInvalid map file : Invalid map file!\n");
+	exit(errno);
+}
 
-	if (!str)
-		return (0);
-	index = 0;
-	while (str[index])
-		index++;
-	return (index);
+void	map_format_error(char *error)
+{
+	ft_printf("ERROR\nInvalid map file! : ");
+	ft_printf("%s\n", error);
+	exit(EXIT_FAILURE);
 }

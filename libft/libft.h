@@ -6,7 +6,7 @@
 /*   By: vsergio <vsergio@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 16:34:25 by vsergio           #+#    #+#             */
-/*   Updated: 2022/07/04 14:57:42 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:08:04 by rwallier         ###   ########.fr       */
 /*   Updated: 2022/05/04 14:33:16 by vsergio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -96,7 +96,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 void	ft_striteri(char const *s, void (*f)(unsigned int, char *));
 
-int	ft_count_digits_base(long long int number, int base);
+int		ft_count_digits_base(long long int number, int base);
 
 t_list	*ft_lstnew(void *content);
 

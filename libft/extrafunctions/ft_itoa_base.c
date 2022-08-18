@@ -6,13 +6,14 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 19:30:09 by rwallier          #+#    #+#             */
-/*   Updated: 2022/07/04 15:50:07 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:08:42 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static	void	ft_writenbr(unsigned long long int nb, char *strnbr, size_t maxsize, char *base)
+static	void	ft_writenbr(unsigned long long int nb, char *strnbr,
+						size_t maxsize, char *base)
 {
 	char	character;
 

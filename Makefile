@@ -1,29 +1,39 @@
-SOURCES	=	so_long.c keyboard_event.c framework.c game_loop.c parse.c so_long_utils.c
+SOURCES			=	so_long.c
 
-OBJECTS	=	$(SOURCES:.c=.o)
+OBJECTS			=	$(SOURCES:.c=.o)
 
-FRAMEWORK	=	-framework OpenGL -framework AppKit
+SOURCES_BONUS	=	so_long_bonus.c keyboard_event_bonus.c framework_bonus.c 
+SOURCES_BONUS	+=	game_loop_bonus.c parse_bonus.c so_long_utils_bonus.c
+SOURCES_BONUS	+=	error_handling_bonus.c map_checker_bonus.c
 
-CFLAGS	=	-Wall -Werror -Wextra
+OBJECTS_BONUS	=	$(SOURCES_BONUS:.c=.o)
 
-LIBFTPATH	=	./libft
+FRAMEWORK		=	-framework OpenGL -framework AppKit
 
-LIBFT	=	$(LIBFTPATH)/libft.a
+CFLAGS			=	-Wall -Werror -Wextra
 
-MLXPATH	=	./minilibx
+LIBFTPATH		=	./libft
 
-MLX	=	$(MLXPATH)/libmlx.a
+LIBFT			=	$(LIBFTPATH)/libft.a
 
-MAKE	=	make -C
+MLXPATH			=	./minilibx
 
-NAME = so_long
+MLX				=	$(MLXPATH)/libmlx.a
 
-RM = rm -f
+MAKE			=	make -C
+
+NAME			=	so_long
+
+NAME_BONUS		=	so_long_bonus
+
+RM				=	rm -f
 
 .c.o:	
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all: $(NAME)
+
+bonus: $(NAME_BONUS)
 
 $(LIBFT):
 		$(MAKE) $(LIBFTPATH)
@@ -34,13 +44,16 @@ $(MLX):
 $(NAME):	$(OBJECTS) $(LIBFT) $(MLX)
 		$(CC) $(LIBFT) $(MLX) $(OBJECTS) $(FRAMEWORK) -o $(NAME)
 
+$(NAME_BONUS):	$(OBJECTS_BONUS) $(LIBFT) $(MLX)
+		$(CC) $(LIBFT) $(MLX) $(OBJECTS_BONUS) $(FRAMEWORK) -o $(NAME_BONUS)
+
 clean:
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJECTS) $(OBJECTS_BONUS)
 	$(MAKE) $(MLXPATH) clean
 	$(MAKE) $(LIBFTPATH) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BONUS)
 	$(MAKE) $(LIBFTPATH) clean
 	$(RM) $(MLX)
 
