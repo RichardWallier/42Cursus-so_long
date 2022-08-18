@@ -1,4 +1,6 @@
-SOURCES			=	so_long.c
+SOURCES	=	so_long.c keyboard_event.c framework.c 
+SOURCES	+=	parse.c so_long_utils.c map_checker.c
+SOURCES	+=	error_handling.c
 
 OBJECTS			=	$(SOURCES:.c=.o)
 
