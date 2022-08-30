@@ -12,7 +12,7 @@ OBJECTS_BONUS	=	$(SOURCES_BONUS:.c=.o)
 
 FRAMEWORK		=	-framework OpenGL -framework AppKit
 
-# CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra
 
 LIBFTPATH		=	./libft
 

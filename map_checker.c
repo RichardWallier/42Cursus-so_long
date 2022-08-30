@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 09:25:07 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/30 08:44:54 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 09:05:29 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	map_check_border(t_data *data, int rows_lenght, int cows_lenght)
 	while (index < cows_lenght - 1)
 	{
 		if (data->map.coordenates[rows_lenght - 1][index] != '1')
-				map_format_error("map not closed with 1");
+			map_format_error("map not closed with 1");
 		index++;
 	}
 }
