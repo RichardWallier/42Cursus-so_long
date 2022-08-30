@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:03:47 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/30 08:20:01 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:43:17 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,6 @@ typedef struct s_map
 	int		collectable_height;
 	int		ber_x;
 	int		ber_y;
-	void	*enemy_image;
-	int		enemy_width;
-	int		enemy_height;
 }				t_map;
 
 typedef struct s_data

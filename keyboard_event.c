@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 04:01:25 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/30 08:14:06 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:50:53 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	keyboard_event(int keycode, t_data *data)
 		&& data->map.collectable_count == 0)
 		destroy_all(data);
 	refresh(data);
-	return (0);
+	return (1);
 }
 
 int	player_w(t_data *data)
