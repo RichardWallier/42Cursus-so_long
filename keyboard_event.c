@@ -6,11 +6,11 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 04:01:25 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 12:34:13 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:14:06 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include "so_long.h"
 
 int	keyboard_event(int keycode, t_data *data)
 {
@@ -37,7 +37,7 @@ int	player_w(t_data *data)
 {
 	if (data->map.coordenates[data->player.ber_y - 1]
 		[data->player.ber_x] == '1')
-		return (1);
+		return (0);
 	data->player.ber_y--;
 	data->player.y -= data->player.velocity_y;
 	data->player.moves++;

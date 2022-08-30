@@ -6,12 +6,14 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 11:03:47 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 12:35:39 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:20:01 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define TILE_SIZE 56
+# define GAME_NAME "so_long"
 # define W_KEY 13
 # define A_KEY 0
 # define S_KEY 1 
@@ -68,9 +70,11 @@ typedef struct s_map
 	int		collectable_count;
 	int		collectable_width;
 	int		collectable_height;
-	void	*enemy_image;
 	int		ber_x;
 	int		ber_y;
+	void	*enemy_image;
+	int		enemy_width;
+	int		enemy_height;
 }				t_map;
 
 typedef struct s_data

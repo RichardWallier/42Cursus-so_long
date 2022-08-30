@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 04:01:36 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 12:15:54 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:17:41 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ void	map_parse(t_data *data)
 {
 	data->map.game_loop = 0;
 	data->map.game_frame = 0;
+	data->player.moves = 0;
 	data->map.ber_x = rows_len(data->map.file);
 	get_map(data);
 	data->map.ber_y = ft_strlen(data->map.coordenates[0]);
-	data->map.floor_width = 56;
-	data->map.floor_height = 56;
-	data->map.exit_width = 56;
-	data->map.exit_height = 56;
-	data->map.wall_width = 56;
-	data->map.wall_height = 56;
+	data->map.floor_width = TILE_SIZE;
+	data->map.floor_height = TILE_SIZE;
+	data->map.exit_width = TILE_SIZE;
+	data->map.exit_height = TILE_SIZE;
+	data->map.wall_width = TILE_SIZE;
+	data->map.wall_height = TILE_SIZE;
 	data->map.floor_image = mlx_xpm_file_to_image(data->mlx,
 			"./assets/floor.xpm",
 			&data->map.floor_width, &data->map.floor_height);
@@ -69,16 +70,17 @@ void	player_parse(t_data *data)
 		while (data->map.coordenates[x][y])
 		{
 			if (data->map.coordenates[x][y] == 'P')
+			{
 				set_player_x_y(data, x, y);
+			}
 			y++;
 		}
 		x++;
 	}
-	data->player.moves = 0;
 	data->player.width = 48;
 	data->player.height = 54;
-	data->player.velocity_x = 56;
-	data->player.velocity_y = 56;
+	data->player.velocity_x = TILE_SIZE;
+	data->player.velocity_y = TILE_SIZE;
 	data->player.image = mlx_xpm_file_to_image(data->mlx,
 			"./assets/demon.xpm",
 			&data->player.width, &data->player.height);

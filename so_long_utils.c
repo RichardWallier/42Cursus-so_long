@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 04:01:39 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 12:19:56 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:17:52 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	get_map(t_data *data)
 
 int	set_player_x_y(t_data *data, int x, int y)
 {
-	data->player.x = y * 56;
-	data->player.y = x * 56;
+	data->player.x = y * TILE_SIZE;
+	data->player.y = x * TILE_SIZE;
 	data->player.ber_x = y;
 	data->player.ber_y = x;
 	return (1);

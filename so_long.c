@@ -6,7 +6,7 @@
 /*   By: rwallier <rwallier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 13:46:08 by rwallier          #+#    #+#             */
-/*   Updated: 2022/08/18 12:36:12 by rwallier         ###   ########.fr       */
+/*   Updated: 2022/08/30 08:19:46 by rwallier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main(int argc, char *argv[])
 	map_check_name(&data);
 	data.mlx = mlx_init();
 	map_parse(&data);
-	data.window.ptr = mlx_new_window(data.mlx, (data.map.ber_y - 1) * 56,
-			(data.map.ber_x - 1) * 56, "so_long");
+	data.window.ptr = mlx_new_window(data.mlx, (data.map.ber_y - 1) * TILE_SIZE,
+			(data.map.ber_x - 1) * TILE_SIZE, GAME_NAME);
 	collectable_parse(&data);
 	player_parse(&data);
 	map_draw(&data);
@@ -32,7 +32,6 @@ int	main(int argc, char *argv[])
 	mlx_do_key_autorepeaton(data.mlx);
 	mlx_key_hook(data.window.ptr, keyboard_event, &data);
 	mlx_hook(data.window.ptr, 17, 0L, destroy_all, &data);
-	ft_printf("teste");
 	mlx_loop(data.mlx);
 	return (0);
 }
